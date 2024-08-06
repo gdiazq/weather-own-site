@@ -1,7 +1,7 @@
 'use client';
 
 import { ThemeSwitcher } from "@/components/button/ThemeSwitcher";
-import { SearchBar } from "../ui/SearchBar";
+import { SearchBar } from "../ui/form/SearchBar";
 
 export const Navbar = () => {
     return (
