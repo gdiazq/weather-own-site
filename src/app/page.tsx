@@ -1,7 +1,10 @@
 import { Header } from '@/components/layout/Header';
 
 export default function Home() {
-    return (
+
+
+
+  return (
     <>
       <Header />
       <main className="flex min-h-screen flex-col items-center p-24">
