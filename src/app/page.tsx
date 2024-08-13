@@ -1,7 +1,20 @@
 import { Header } from '@/components/layout/Header';
+import { useState } from 'react';
 
 export default function Home() {
+  const [location, setLocation] = useState('')
 
+  const getWaetherTime = async () => {
+  const api_url = `http://api.weatherapi.com/v1/current.json?key=${process.env.AUTH_API_KEY}&q=${location}`
+
+    if (location) {
+      try {
+
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
 
 
   return (
