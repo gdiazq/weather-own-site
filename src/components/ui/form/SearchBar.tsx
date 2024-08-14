@@ -1,14 +1,17 @@
 'use client'
 
 import { GoSearch } from "react-icons/go";
+import { useState } from "react";
 
 export const SearchBar = () => {
+    const [location, setLocation] = useState('');
+
     return (
         <div className="flex items-center justify-center gap-x-4">
             <input
                 type="text"
                 id="location"
-                value=""
+                value={location}
                 onChange={() => {}}
                 placeholder="Search city"
                 className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
