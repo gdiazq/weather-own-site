@@ -11,17 +11,16 @@ export const getWeatherData = async (lat: number, lon: number) => {
       city: data.name,
       img: `http://openweathermap.org/img/w/${data.weather[0].icon}.png`,
       temp: data.main.temp,
-      time: new Date(data.dt * 1000).toLocaleString(),
+      time: new Date(data.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       condition: data.weather[0].main,
       humidity: data.main.humidity,
-      wind: data.wind.speed * 3.6,
+      wind: data.wind.speed,
       visibility: data.visibility / 1000,
-      gust: data.wind.gust * 3.6,
+      gust: data.wind.gust,
     };
     }
-    // Asegúrate de ajustar esto según la estructura de datos que devuelve tu API
   } catch (error) {
     console.error('Error al obtener el clima:', error);
-    return null; // Maneja el error según sea necesario
+    return null;
   }
 };
