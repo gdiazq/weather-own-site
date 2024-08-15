@@ -6,6 +6,7 @@ import { GoSearch } from "react-icons/go";
 
 interface SearchBarProps {
     setWeather: (weather: JSX.Element) => void;
+    
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
@@ -23,14 +24,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
       setWeather(
         <>
           <div className="text-center text-3xl p-2 text-black dark:text-white">{weatherData.city}</div>
-          <div className="flex justify-center">
-            <div className="flow-root">
-              <div className="float-left">
+          <div className="flex flex-col justify-center items-center">
                 <img src={weatherData.img} width="80" height="80" alt="Condition" />
+              <div className="text-6xl pb-2 text-black dark:text-white">
+                <p>{weatherData.temp}°</p>
               </div>
-              <div className="float-left text-6xl pb-2 degrees text-black dark:text-white">{weatherData.temp}°</div>
-              <div className="float-left text-3xl pb-2 degrees text-black dark:text-white">{weatherData.time}</div>
-            </div>
+              <div className="text-3xl pb-2 text-black dark:text-white">
+                <p>{weatherData.time}</p>
+              </div>
           </div>
           <div className="text-center text-black dark:text-white">{weatherData.condition}</div>
           <div className="flow-root p-2">
@@ -48,7 +49,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
   return (
     <div className="flex items-center justify-center gap-x-4">
       <input
-        className="p-2 rounded-md border text-white dark:text-black border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
+        className="p-2 rounded-md border text-black dark:text-white border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
         type="text"
         id="location"
         value={location}

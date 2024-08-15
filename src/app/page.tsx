@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import SearchBar from '@/components/ui/form/SearchBar';
 import { ThemeSwitcher } from '@/components/button/ThemeSwitcher';
+import WeatherDisplay from '@/components/ui/form/WeatherDisplay';
 
 export default function Home() {
   const [weather, setWeather] = useState<JSX.Element | null>(null);
@@ -18,16 +19,25 @@ export default function Home() {
       </header>
 
       {weather && (
-        <div className="flex w-full p-20 justify-center">
+        <div className="flex w-full p-10 justify-center">
           <div className="w-full max-w-xs">
             <div className="mb-4">
-              <div className="bg-white dark:bg-black shadow-lg rounded-3xl px-8 pt-6 pb-8 mb-4 opacity-80">
+              <div className=" flex flex-col bg-white dark:bg-black shadow-lg rounded-3xl px-8 pt-6 pb-8 mb-4 opacity-80">
                 {weather}
               </div>
             </div>
           </div>
         </div>
       )}
+      <div className="flex w-full p-10 justify-center">
+        <div className="w-full max-w-xs">
+          <div className="mb-4">
+            <div className=" flex flex-col bg-white dark:bg-black shadow-lg rounded-3xl px-8 pt-6 pb-8 mb-4 opacity-80">
+              <WeatherDisplay />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
