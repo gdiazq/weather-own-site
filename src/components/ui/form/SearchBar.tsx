@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { getWeather } from '@/app/api/getWeatherTime';
+import { GoSearch } from "react-icons/go";
 
 interface SearchBarProps {
     setWeather: (weather: JSX.Element) => void;
@@ -44,24 +45,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
   };
 
   return (
-    <div className="relative">
-      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-        <svg
-          aria-hidden="true"
-          className="w-5 h-5 text-gray-500 dark:text-gray-400"
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-            clipRule="evenodd"
-          ></path>
-        </svg>
-      </div>
+    <div className="flex items-center justify-center gap-x-4">
       <input
-        className="block bg-slate-700 text-white rounded-lg opacity-70 pl-10 p-2"
+        className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
         type="text"
         id="location"
         value={location}
@@ -73,21 +59,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold m-2 p-2.5 rounded-lg"
         onClick={fetchWeather}
       >
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          ></path>
-        </svg>
-        <span className="sr-only">GO</span>
+        <GoSearch />
       </button>
     </div>
   );

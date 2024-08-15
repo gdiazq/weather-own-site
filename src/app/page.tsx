@@ -1,17 +1,21 @@
 'use client';
-
+import Image from 'next/image';
 import { useState } from 'react';
 import SearchBar from '@/components/ui/form/SearchBar';
-import { Header } from '@/components/layout/Header';
+import { ThemeSwitcher } from '@/components/button/ThemeSwitcher';
 
 export default function Home() {
   const [weather, setWeather] = useState<JSX.Element | null>(null);
 
   return (
     <>
-      <nav className="flex items-center justify-center py-4 bg-gray-100 w-full m-0 opacity-90">
-        <SearchBar setWeather={setWeather} />
-      </nav>
+      <header className="flex flex-row items-center justify-between p-4">
+        <Image src="/logo.png" width={80} height={80} priority={true} alt="logo" />
+        <nav className="flex items-center justify-center gap-x-5">
+          <SearchBar setWeather={setWeather}/>
+          <ThemeSwitcher />
+        </nav>
+      </header>
 
       {weather && (
         <div className="flex w-full p-20 justify-center">
