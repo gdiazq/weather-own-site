@@ -1,8 +1,7 @@
 'use server'
 
 export const getWeather = async (location: string) => {
-    const api_key = '19a08913994b404587152504230704';
-    const api_url = `http://api.weatherapi.com/v1/current.json?key=${api_key}&q=${location}`
+    const api_url = `http://api.weatherapi.com/v1/current.json?key=${process.env.API_WEATHER}&q=${location}`
   
     if (location) {
       try {
