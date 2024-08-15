@@ -22,21 +22,22 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
     if (weatherData) {
       setWeather(
         <>
-          <div className="text-center text-2xl p-2 text-black dark:text-white">{weatherData.city}</div>
+          <div className="text-center text-3xl p-2 text-black dark:text-white">{weatherData.city}</div>
           <div className="flex justify-center">
             <div className="flow-root">
               <div className="float-left">
                 <img src={weatherData.img} width="80" height="80" alt="Condition" />
               </div>
-              <div className="float-left text-6xl degrees text-black dark:text-white">{weatherData.temp}</div>
+              <div className="float-left text-6xl pb-2 degrees text-black dark:text-white">{weatherData.temp}°</div>
+              <div className="float-left text-3xl pb-2 degrees text-black dark:text-white">{weatherData.time}</div>
             </div>
           </div>
-          <div className="text-center text-gray-600">{weatherData.condition}</div>
+          <div className="text-center text-black dark:text-white">{weatherData.condition}</div>
           <div className="flow-root p-2">
-            <div className="float-left text-gray-600">Humidity: {weatherData.humidity} %</div>
-            <div className="float-right text-gray-600">Wind: {weatherData.wind} mph</div>
-            <div className="float-left text-gray-600">Visibility: {weatherData.visibility} mi</div>
-            <div className="float-right text-gray-600">Gust: {weatherData.gust} mph</div>
+            <div className="float-left text-black dark:text-white">Humidity: {weatherData.humidity} %</div>
+            <div className="float-right text-black dark:text-white">Wind: {weatherData.wind} kph</div>
+            <div className="float-left text-black dark:text-white">Visibility: {weatherData.visibility} mi</div>
+            <div className="float-right text-black dark:text-white">Gust: {weatherData.gust} kph</div>
           </div>
         </>
       );
@@ -47,7 +48,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
   return (
     <div className="flex items-center justify-center gap-x-4">
       <input
-        className="p-2 rounded-md border border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
+        className="p-2 rounded-md border text-white dark:text-black border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
         type="text"
         id="location"
         value={location}

@@ -21,7 +21,7 @@ export default function Home() {
         <div className="flex w-full p-20 justify-center">
           <div className="w-full max-w-xs">
             <div className="mb-4">
-              <div className="bg-white shadow-lg rounded-3xl px-8 pt-6 pb-8 mb-4 opacity-80">
+              <div className="bg-white dark:bg-black shadow-lg rounded-3xl px-8 pt-6 pb-8 mb-4 opacity-80">
                 {weather}
               </div>
             </div>
