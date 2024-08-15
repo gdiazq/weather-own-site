@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { getWeather } from '@/app/api/getWeatherTime';
 
 interface SearchBarProps {
-  setWeather: (weather: JSX.Element) => void;
+    setWeather: (weather: JSX.Element) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
@@ -21,13 +21,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
     if (weatherData) {
       setWeather(
         <>
-          <div className="text-center text-2xl p-2">{weatherData.city}</div>
+          <div className="text-center text-2xl p-2 text-black dark:text-white">{weatherData.city}</div>
           <div className="flex justify-center">
             <div className="flow-root">
               <div className="float-left">
                 <img src={weatherData.img} width="80" height="80" alt="Condition" />
               </div>
-              <div className="float-left text-6xl degrees">{weatherData.temp}</div>
+              <div className="float-left text-6xl degrees text-black dark:text-white">{weatherData.temp}</div>
             </div>
           </div>
           <div className="text-center text-gray-600">{weatherData.condition}</div>

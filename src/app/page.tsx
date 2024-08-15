@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import SearchBar from '@/components/ui/form/SearchBar';
+import { Header } from '@/components/layout/Header';
 
 export default function Home() {
   const [weather, setWeather] = useState<JSX.Element | null>(null);
