@@ -7,7 +7,7 @@ export const SearchBar = () => {
     const [location, setLocation] = useState('');
 
     return (
-        <div className="flex items-center justify-center gap-x-4">
+        <form className="flex items-center justify-center gap-x-4">
             <input
                 type="text"
                 id="location"
@@ -19,6 +19,6 @@ export const SearchBar = () => {
             <button className="p-3 rounded-md bg-blue-500 text-white">
                 <GoSearch />
             </button>
-        </div>
+        </form>
     );
 }
