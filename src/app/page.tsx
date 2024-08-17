@@ -1,9 +1,9 @@
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
-import SearchBar from '@/components/ui/form/SearchBar';
+import SearchBar from '@/components/ui/SearchBar';
 import { ThemeSwitcher } from '@/components/button/ThemeSwitcher';
-import WeatherDisplay from '@/components/ui/form/WeatherDisplay';
+import WeatherDisplay from '@/components/ui/WeatherDisplay';
 
 export default function Home() {
   const [weather, setWeather] = useState<JSX.Element | null>(null);
