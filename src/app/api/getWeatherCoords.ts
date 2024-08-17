@@ -11,12 +11,12 @@ export const getWeatherData = async (lat: number, lon: number) => {
       city: data.name,
       img: `http://openweathermap.org/img/w/${data.weather[0].icon}.png`,
       temp: data.main.temp,
-      time: new Date(data.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       condition: data.weather[0].main,
       humidity: data.main.humidity,
-      wind: data.wind.speed,
+      wind: data.wind.speed?? 0,
       visibility: data.visibility / 1000,
-      gust: data.wind.gust,
+      gust: data.wind.gust?? 0,
     };
     }
   } catch (error) {
