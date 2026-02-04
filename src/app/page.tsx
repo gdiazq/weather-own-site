@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="flex flex-row items-center justify-between p-4">
+      <header className="flex flex-col gap-4 p-4 md:flex-row md:items-center md:justify-between">
         <Image
           src="/banner-light.svg"
           width={320}
@@ -33,10 +33,12 @@ export default function Home() {
           alt="GEDIAZQ logo"
           className="hidden h-12 w-auto sm:h-14 md:h-16 dark:block"
         />
-        <nav className="flex items-center justify-center gap-x-3">
+        <nav className="flex w-full items-center justify-between gap-3 rounded-full bg-white/70 px-4 py-2 ring-1 ring-black/10 backdrop-blur dark:bg-black/50 dark:ring-white/10 md:w-auto md:justify-start">
           <SearchBar setWeather={setWeather} lang={lang} />
-          <LanguageSwitcher lang={lang} setLang={setLang} />
-          <ThemeSwitcher />
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher lang={lang} setLang={setLang} />
+            <ThemeSwitcher />
+          </div>
         </nav>
       </header>
 

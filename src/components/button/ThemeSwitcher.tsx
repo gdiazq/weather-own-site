@@ -19,14 +19,16 @@ export const ThemeSwitcher = () => {
     if(!mounted) return null
 
     return (
-        <div>
-            <button className="block p-1 rounded-full" onClick={handleSetTheme}>
-                {theme === "light" ? (
-                    <BsMoon className="text-black size-5" />
-                ) : (
-                    <BsSun className="size-5" />
-                )}
-            </button>
-        </div>
+        <button
+          className="grid h-8 w-8 place-items-center rounded-full border border-black/10 bg-white/70 text-black transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-cyan-300 dark:border-white/10 dark:bg-black/40 dark:text-white"
+          onClick={handleSetTheme}
+          aria-label="Toggle theme"
+        >
+          {theme === "light" ? (
+            <BsMoon className="size-4" />
+          ) : (
+            <BsSun className="size-4" />
+          )}
+        </button>
     );
 };

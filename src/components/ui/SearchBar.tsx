@@ -34,9 +34,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather, lang }) => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-x-4">
+    <div className="flex items-center gap-2">
       <input
-        className="p-2 rounded-md border text-black dark:text-white border-gray-300 focus:outline-none focus:ring focus:ring-blue-500"
+        className="w-40 bg-transparent text-sm text-black placeholder:text-gray-500 focus:outline-none dark:text-white dark:placeholder:text-gray-400 sm:w-56"
         type="text"
         id="location"
         value={location}
@@ -45,8 +45,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather, lang }) => {
         placeholder={t.searchPlaceholder}
       />
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold m-2 p-2.5 rounded-lg"
+        className="grid h-8 w-8 place-items-center rounded-full bg-cyan-500 text-white transition hover:bg-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-300"
         onClick={fetchWeather}
+        aria-label="Search"
       >
         <GoSearch />
       </button>

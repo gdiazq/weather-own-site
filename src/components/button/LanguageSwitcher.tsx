@@ -9,10 +9,10 @@ type LanguageSwitcherProps = {
 
 const LanguageSwitcher = ({ lang, setLang }: LanguageSwitcherProps) => {
   return (
-    <label className="flex items-center gap-2 text-sm text-black dark:text-white">
+    <label className="flex items-center text-black dark:text-white">
       <span className="sr-only">{i18n[lang].languageLabel}</span>
       <select
-        className="rounded-md border border-gray-300 bg-white px-2 py-1 text-black focus:outline-none focus:ring focus:ring-blue-500 dark:border-gray-700 dark:bg-black dark:text-white"
+        className="h-8 rounded-full border border-black/10 bg-white/70 px-3 text-xs font-semibold uppercase tracking-wider text-black focus:outline-none focus:ring-2 focus:ring-cyan-300 dark:border-white/10 dark:bg-black/40 dark:text-white"
         value={lang}
         onChange={(e) => setLang(e.target.value as Language)}
         aria-label={i18n[lang].languageLabel}
