@@ -1,16 +1,18 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
-import { getWeather } from '@/app/api/getWeatherTime';
-import { GoSearch } from "react-icons/go";
+import { GoSearch } from 'react-icons/go';
+import { i18n, Language } from '@/app/i18n';
+import { WeatherResponse } from '@/app/types/weather';
 
 interface SearchBarProps {
-    setWeather: (weather: JSX.Element) => void;
-    
+  setWeather: (weather: WeatherResponse | null) => void;
+  lang: Language;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ setWeather, lang }) => {
   const [location, setLocation] = useState('');
+  const t = i18n[lang];
 
   const handleKeyUp = (key: string) => {
     if (key === 'Enter') {
@@ -19,29 +21,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
   };
 
   const fetchWeather = async () => {
-    const weatherData = await getWeather(location);
+    if (!location.trim()) return;
+
+    const res = await fetch(`/api/getWeatherTime?location=${encodeURIComponent(location)}`);
+    if (!res.ok) return;
+
+    const weatherData = (await res.json()) as WeatherResponse;
     if (weatherData) {
-      setWeather(
-        <>
-          <div className="text-center text-3xl p-2 text-black dark:text-white">{weatherData.city}</div>
-          <div className="flex flex-col justify-center items-center">
-                <img src={weatherData.img} width="80" height="80" alt="Condition" />
-              <div className="text-6xl pb-2 text-black dark:text-white">
-                <p>{weatherData.temp}°</p>
-              </div>
-              <div className="text-3xl pb-2 text-black dark:text-white">
-                <p>{weatherData.time}</p>
-              </div>
-          </div>
-          <div className="text-center text-black dark:text-white">{weatherData.condition}</div>
-          <div className="flow-root p-2">
-            <div className="float-left text-black dark:text-white">Humidity: {weatherData.humidity} %</div>
-            <div className="float-right text-black dark:text-white">Wind: {weatherData.wind} kph</div>
-            <div className="float-left text-black dark:text-white">Visibility: {weatherData.visibility} mi</div>
-            <div className="float-right text-black dark:text-white">Gust: {weatherData.gust} kph</div>
-          </div>
-        </>
-      );
+      setWeather(weatherData);
       setLocation('');
     }
   };
@@ -55,7 +42,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setWeather }) => {
         value={location}
         onChange={(e) => setLocation(e.target.value)}
         onKeyUp={(e) => handleKeyUp(e.key)}
-        placeholder="Location (ie. Paris)"
+        placeholder={t.searchPlaceholder}
       />
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold m-2 p-2.5 rounded-lg"

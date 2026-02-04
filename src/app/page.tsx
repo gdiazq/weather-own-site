@@ -4,40 +4,50 @@ import { useState } from 'react';
 import SearchBar from '@/components/ui/SearchBar';
 import { ThemeSwitcher } from '@/components/button/ThemeSwitcher';
 import WeatherDisplay from '@/components/ui/WeatherDisplay';
+import WeatherCard from '@/components/ui/WeatherCard';
+import { WeatherResponse } from '@/app/types/weather';
+import WeatherContainer from '@/components/ui/WeatherContainer';
+import LanguageSwitcher from '@/components/button/LanguageSwitcher';
+import { Language } from '@/app/i18n';
 
 export default function Home() {
-  const [weather, setWeather] = useState<JSX.Element | null>(null);
+  const [weather, setWeather] = useState<WeatherResponse | null>(null);
+  const [lang, setLang] = useState<Language>('es');
 
   return (
     <>
       <header className="flex flex-row items-center justify-between p-4">
-        <Image src="/logo.png" width={80} height={80} priority={true} alt="logo" />
-        <nav className="flex items-center justify-center gap-x-5">
-          <SearchBar setWeather={setWeather}/>
+        <Image
+          src="/banner-light.svg"
+          width={320}
+          height={94}
+          priority={true}
+          alt="GEDIAZQ logo"
+          className="h-12 w-auto sm:h-14 md:h-16 dark:hidden"
+        />
+        <Image
+          src="/banner-dark.svg"
+          width={320}
+          height={94}
+          priority={true}
+          alt="GEDIAZQ logo"
+          className="hidden h-12 w-auto sm:h-14 md:h-16 dark:block"
+        />
+        <nav className="flex items-center justify-center gap-x-3">
+          <SearchBar setWeather={setWeather} lang={lang} />
+          <LanguageSwitcher lang={lang} setLang={setLang} />
           <ThemeSwitcher />
         </nav>
       </header>
 
       {weather && (
-        <div className="flex w-full p-8 justify-center">
-          <div className="w-full max-w-xs">
-            <div className="mb-4">
-              <div className=" flex flex-col bg-white dark:bg-black shadow-lg rounded-3xl px-8 pt-6 pb-8 mb-4 opacity-80">
-                {weather}
-              </div>
-            </div>
-          </div>
-        </div>
+        <WeatherContainer>
+          <WeatherCard data={weather} lang={lang} />
+        </WeatherContainer>
       )}
-      <div className="flex w-full p-8 justify-center">
-        <div className="w-full max-w-xs">
-          <div className="mb-4">
-            <div className=" flex flex-col bg-white dark:bg-black shadow-lg rounded-3xl px-8 pt-6 pb-8 mb-4 opacity-80">
-              <WeatherDisplay />
-            </div>
-          </div>
-        </div>
-      </div>
+      <WeatherContainer>
+        <WeatherDisplay lang={lang} />
+      </WeatherContainer>
     </>
   );
 }

@@ -1,15 +1,30 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import useGeolocation from '@/app/hook/useGeolocation';
-import { getWeatherData } from '@/app/api/getWeatherCoords'; // Asegúrate de tener esta función para obtener el clima
+import WeatherCard from '@/components/ui/WeatherCard';
+import { i18n, Language } from '@/app/i18n';
+import { WeatherResponse } from '@/app/types/weather';
 
-const WeatherDisplay = () => {
+type WeatherDisplayProps = {
+  lang: Language;
+};
+
+const WeatherDisplay = ({ lang }: WeatherDisplayProps) => {
   const { location, error } = useGeolocation();
-  const [weatherData, setWeatherData] = useState<any>(null); // Ajusta el tipo según tu estructura de datos
+  const [weatherData, setWeatherData] = useState<WeatherResponse | null>(null);
+  const t = i18n[lang];
 
   useEffect(() => {
     const fetchWeather = async () => {
       if (location) {
-        const data = await getWeatherData(location.lat, location.lon);
+        const res = await fetch(
+          `/api/getWeatherCoords?lat=${encodeURIComponent(location.lat)}&lon=${encodeURIComponent(
+            location.lon
+          )}`
+        );
+        if (!res.ok) return;
+        const data = (await res.json()) as WeatherResponse;
         setWeatherData(data);
       }
     };
@@ -17,34 +32,18 @@ const WeatherDisplay = () => {
   }, [location]);
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return (
+      <div className="text-black dark:text-white">
+        {t.errorPrefix}: {error}
+      </div>
+    );
   }
 
   if (!weatherData) {
-    return <div>Obteniendo datos del clima...</div>;
+    return <div className="text-black dark:text-white">{t.loading}</div>;
   }
 
-  return (
-    <>
-      <div className="text-center text-3xl p-2 text-black dark:text-white">{weatherData.city}</div>
-      <div className="flex flex-col justify-center items-center">
-        <img src={weatherData.img} width="80" height="80" alt="Condition" />
-        <div className="text-6xl pb-2 text-black dark:text-white">
-          <p>{weatherData.temp}°</p>
-        </div>
-        <div className="text-3xl pb-2 text-black dark:text-white">
-          <p>{weatherData.time}</p>
-        </div>
-      </div>
-      <div className="text-center text-black dark:text-white">{weatherData.condition}</div>
-      <div className="flow-root p-2">
-        <div className="float-left text-black dark:text-white">Humidity: {weatherData.humidity} %</div>
-        <div className="float-right text-black dark:text-white">Wind: {weatherData.wind} kph</div>
-        <div className="float-left text-black dark:text-white">Visibility: {weatherData.visibility} mi</div>
-        <div className="float-right text-black dark:text-white">Gust: {weatherData.gust} kph</div>
-      </div>
-    </>
-  );
+  return <WeatherCard data={weatherData} lang={lang} />;
 };
 
 export default WeatherDisplay;
